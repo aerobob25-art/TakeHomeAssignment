@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TakeHomeAssignment (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TakeHomeAssignment (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
