@@ -1,7 +1,7 @@
-﻿using TakeHomeAssignment.Controllers.Interfaces;
-using TakeHomeAssignment.UseCases.Interfaces;
+﻿using TakeHomeAssignment.Core.Controllers.Interfaces;
+using TakeHomeAssignment.Core.UseCases.Interfaces;
 
-namespace TakeHomeAssignment.Controllers
+namespace TakeHomeAssignment.Core.Controllers
 {
     public class RegisterController : IRegisterController
     {

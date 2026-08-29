@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using TakeHomeAssignment.Core.Messages;
-using TakeHomeAssignment.Presenters.Interfaces;
+using TakeHomeAssignment.Core.Presenters.Interfaces;
 
-namespace TakeHomeAssignment.Presenters
+namespace TakeHomeAssignment.Core.Presenters
 {
     public class RegisterPresenter : IRegisterPresenter
     {

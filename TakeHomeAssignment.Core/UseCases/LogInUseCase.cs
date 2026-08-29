@@ -1,10 +1,9 @@
 ﻿using System.Net;
+using TakeHomeAssignment.Core.Gateways.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
-using TakeHomeAssignment.Gateways.Interfaces;
-using TakeHomeAssignment.Presenters.Interfaces;
-using TakeHomeAssignment.UseCases.Interfaces;
+using TakeHomeAssignment.Core.UseCases.Interfaces;
 
 namespace TakeHomeAssignment.UseCases
 {
@@ -72,7 +71,7 @@ namespace TakeHomeAssignment.UseCases
                     ClientState = ClientStates.NoChange
                 });
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
                 _errorPresenter.Present(new ErrorMessage()
                 {

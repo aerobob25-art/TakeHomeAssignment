@@ -1,11 +1,10 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
+using TakeHomeAssignment.Core.Gateways.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
-using TakeHomeAssignment.Gateways.Interfaces;
-using TakeHomeAssignment.Presenters.Interfaces;
-using TakeHomeAssignment.UseCases.Interfaces;
+using TakeHomeAssignment.Core.UseCases.Interfaces;
 
 namespace TakeHomeAssignment.UseCases
 {
@@ -31,16 +30,17 @@ namespace TakeHomeAssignment.UseCases
 
                 if (isSuccess)
                 {
-                    var raw = await response.Content.ReadAsStringAsync();
                     var registerResponse = await response.Content.ReadFromJsonAsync<RegisterResponse>();
-                    if (registerResponse != null)
+                    if (registerResponse == null)
                     {
-                        _registerPresenter.Present(new RegisterResultMessage
-                        {
-                            Id = registerResponse.UserId,
-                            ClientState = ClientStates.Registered
-                        });
+                        throw new HttpRequestException();
                     }
+
+                    _registerPresenter.Present(new RegisterResultMessage
+                    {
+                        Id = registerResponse.UserId,
+                        ClientState = ClientStates.Registered
+                    });
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace TakeHomeAssignment.UseCases
                     ClientState = ClientStates.Unregistered
                 });
             }
-            catch (Exception)
+            catch (HttpRequestException)
             {
                 _errorPresenter.Present(new ErrorMessage()
                 {

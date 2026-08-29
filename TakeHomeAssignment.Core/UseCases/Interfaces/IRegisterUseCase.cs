@@ -1,4 +1,4 @@
-﻿namespace TakeHomeAssignment.UseCases.Interfaces
+﻿namespace TakeHomeAssignment.Core.UseCases.Interfaces
 {
     public interface IRegisterUseCase
     {

@@ -1,6 +1,6 @@
 ﻿using TakeHomeAssignment.Core.Messages;
 
-namespace TakeHomeAssignment.Presenters.Interfaces
+namespace TakeHomeAssignment.Core.Presenters.Interfaces
 {
     public interface ILogInPresenter
     {

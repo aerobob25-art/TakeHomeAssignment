@@ -1,4 +1,4 @@
-﻿namespace TakeHomeAssignment.Controllers.Interfaces
+﻿namespace TakeHomeAssignment.Core.Controllers.Interfaces
 {
     public interface IRegisterController
     {

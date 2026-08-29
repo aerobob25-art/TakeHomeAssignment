@@ -1,6 +1,6 @@
 ﻿using Moq;
-using TakeHomeAssignment.Controllers;
-using TakeHomeAssignment.UseCases.Interfaces;
+using TakeHomeAssignment.Core.Controllers;
+using TakeHomeAssignment.Core.UseCases.Interfaces;
 
 namespace TakeHomeAssignment.Tests.Controllers
 {

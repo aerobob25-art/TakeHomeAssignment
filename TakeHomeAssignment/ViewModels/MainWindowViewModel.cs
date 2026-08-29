@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using TakeHomeAssignment.Controllers.Interfaces;
+using TakeHomeAssignment.Core.Controllers.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 using TakeHomeAssignment.Core.Models;
 

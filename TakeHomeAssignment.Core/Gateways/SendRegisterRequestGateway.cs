@@ -1,6 +1,6 @@
-﻿using TakeHomeAssignment.Gateways.Interfaces;
+﻿using TakeHomeAssignment.Core.Gateways.Interfaces;
 
-namespace TakeHomeAssignment.Gateways
+namespace TakeHomeAssignment.Core.Gateways
 {
     public class SendRegisterRequestGateway : ISendRegisterRequestGateway
     {
