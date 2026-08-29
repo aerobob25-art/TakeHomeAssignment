@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Presenters\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TakeHomeAssignment.Core\TakeHomeAssignment.Core.csproj" />
   </ItemGroup>
 
