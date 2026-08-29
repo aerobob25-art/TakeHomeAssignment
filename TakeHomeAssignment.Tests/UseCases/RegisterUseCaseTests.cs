@@ -5,7 +5,7 @@ using TakeHomeAssignment.Core.Gateways.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
-using TakeHomeAssignment.UseCases;
+using TakeHomeAssignment.Core.UseCases;
 
 namespace TakeHomeAssignment.Tests.UseCases
 {

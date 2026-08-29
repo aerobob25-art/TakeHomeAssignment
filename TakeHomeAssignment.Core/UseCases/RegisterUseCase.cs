@@ -6,7 +6,7 @@ using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
 using TakeHomeAssignment.Core.UseCases.Interfaces;
 
-namespace TakeHomeAssignment.UseCases
+namespace TakeHomeAssignment.Core.UseCases
 {
     public class RegisterUseCase : IRegisterUseCase
     {
