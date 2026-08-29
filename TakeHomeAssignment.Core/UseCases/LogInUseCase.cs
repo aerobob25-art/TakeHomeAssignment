@@ -24,7 +24,7 @@ namespace TakeHomeAssignment.Core.UseCases
         {
             try
             {
-                var response = await _sendLogInRequestGateway.ExecuteAsync(userId);
+                using var response = await _sendLogInRequestGateway.ExecuteAsync(userId);
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.OK:

@@ -25,7 +25,7 @@ namespace TakeHomeAssignment.Core.UseCases
         {
             try
             {
-                var response = await _sendRegisterRequestGateway.ExecuteAsync();
+                using var response = await _sendRegisterRequestGateway.ExecuteAsync();
                 var isSuccess = response.IsSuccessStatusCode;
 
                 if (isSuccess)
