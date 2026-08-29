@@ -1,5 +1,4 @@
 ﻿using TakeHomeAssignment.Controllers.Interfaces;
-using TakeHomeAssignment.UseCases;
 using TakeHomeAssignment.UseCases.Interfaces;
 
 namespace TakeHomeAssignment.Controllers

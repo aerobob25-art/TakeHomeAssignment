@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using System.Windows.Input;
 using TakeHomeAssignment.Controllers.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 
@@ -14,6 +13,7 @@ namespace TakeHomeAssignment.ViewModels
     {
         private ILogInController _logInController;
         private IRegisterController _registerController;
+        private bool _isWorking;
 
         public MainWindowViewModel(ILogInController logInController, IRegisterController registerController, IMessenger messenger)
             : base(messenger)
@@ -22,19 +22,38 @@ namespace TakeHomeAssignment.ViewModels
             _logInController = logInController;
             _registerController = registerController;
 
-            LogInCommand = new RelayCommand(LogIn);
-            RegisterCommand = new RelayCommand(Register);
+            LogInCommand = new RelayCommand(LogIn, CanLogIn);
+            RegisterCommand = new RelayCommand(Register, CanRegister);
         }
 
         private void Register()
         {
             ClearErrorState();
+            SetWorking(true);
             _registerController.Execute();
         }
 
         private void LogIn()
         {
+            ClearErrorState();
+            SetWorking(true);
             _logInController.Execute(UserId);
+        }
+
+        private void SetWorking(bool isWorking)
+        {
+            _isWorking = isWorking;
+            LogInCommand.NotifyCanExecuteChanged();
+            RegisterCommand.NotifyCanExecuteChanged();
+        }
+        private bool CanLogIn()
+        {
+            return !_isWorking;
+        }
+
+        private bool CanRegister()
+        {
+            return !_isWorking;
         }
 
         private void ClearErrorState()
@@ -47,22 +66,25 @@ namespace TakeHomeAssignment.ViewModels
         {
             UserId = message.Id;
             ClientState = "Registered";
+            SetWorking(false);
         }
 
         public void Receive(ErrorMessage message)
         {
             HasError = true;
             ErrorMessage = message.Error;
+            SetWorking(false);
         }
 
         public void Receive(LogInResultMessage message)
         {
             ClientState = "Logged In";
+            SetWorking(false);
         }
 
-        public ICommand LogInCommand { get; }
+        public IRelayCommand LogInCommand { get; }
         
-        public ICommand RegisterCommand { get; }
+        public IRelayCommand RegisterCommand { get; }
 
 
         private long _userId;
@@ -72,7 +94,12 @@ namespace TakeHomeAssignment.ViewModels
             set => SetProperty(ref _userId, value); 
         }
 
-        public string ClientState { get; set; } = "Unregistered";
+        private string _clientState = "Unregistered";
+        public string ClientState
+        {
+            get => _clientState;
+            set => SetProperty(ref _clientState, value);
+        }
 
         private bool _hasError = false;
         public bool HasError 

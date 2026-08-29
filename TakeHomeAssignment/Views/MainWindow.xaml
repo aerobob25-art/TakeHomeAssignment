@@ -15,7 +15,15 @@
     </Window.SystemBackdrop>
 
     <Grid x:Name="Root">
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="0, 50">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -61,13 +69,19 @@
                 <Button Command="{Binding RegisterCommand}" Content="Register" />
             </StackPanel>
             <TextBlock
-                HorizontalAlignment="Center"
-                Foreground="Red"
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Foreground="Red"
                 Text="{Binding ErrorMessage}"
                 Visibility="{Binding HasError, Converter={StaticResource BoolToVisibilityConverter}}" />
         </Grid>
+        <TextBlock
+            Grid.Row="1"
+            MaxHeight="30"
+            Margin="10"
+            HorizontalAlignment="Left"
+            Text="{Binding ClientState}" />
     </Grid>
 </Window>
