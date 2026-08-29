@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using System;
 using System.Windows.Input;
 using TakeHomeAssignment.Controllers.Interfaces;
 using TakeHomeAssignment.Core.Messages;
@@ -10,6 +9,7 @@ namespace TakeHomeAssignment.ViewModels
 {
     public class MainWindowViewModel : ObservableRecipient,
         IRecipient<RegisterResultMessage>,
+        IRecipient<LogInResultMessage>,
         IRecipient<ErrorMessage>
     {
         private ILogInController _logInController;
@@ -55,13 +55,18 @@ namespace TakeHomeAssignment.ViewModels
             ErrorMessage = message.Error;
         }
 
+        public void Receive(LogInResultMessage message)
+        {
+            ClientState = "Logged In";
+        }
+
         public ICommand LogInCommand { get; }
         
         public ICommand RegisterCommand { get; }
 
 
-        private int _userId;
-        public int UserId 
+        private long _userId;
+        public long UserId 
         { 
             get => _userId; 
             set => SetProperty(ref _userId, value); 

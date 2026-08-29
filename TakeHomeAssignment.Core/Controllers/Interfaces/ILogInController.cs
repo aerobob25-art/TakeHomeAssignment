@@ -2,6 +2,6 @@
 {
     public interface ILogInController
     {
-        void Execute(int userId);
+        void Execute(long userId);
     }
 }

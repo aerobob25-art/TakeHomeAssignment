@@ -52,7 +52,7 @@ namespace TakeHomeAssignment
             IErrorPresenter errorPresenter = new ErrorPresenter(messenger);
 
             IRegisterUseCase registerUseCase = new RegisterUseCase(sendRegisterRequestGateway, registerPresenter, errorPresenter);
-            ILogInUseCase logInUseCase = new LogInUseCase(sendLogInRequestGateway, logInPresenter);
+            ILogInUseCase logInUseCase = new LogInUseCase(sendLogInRequestGateway, logInPresenter, errorPresenter);
 
             ILogInController logInController = new LogInController(logInUseCase);
             IRegisterController registerController = new RegisterController(registerUseCase);

@@ -11,7 +11,7 @@ namespace TakeHomeAssignment.Gateways
             _httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> ExecuteAsync(int userId)
+        public async Task<HttpResponseMessage> ExecuteAsync(long userId)
         {
             return await _httpClient.PostAsync($"/login?user_id={userId}", null);
         }

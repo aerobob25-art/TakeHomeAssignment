@@ -2,6 +2,6 @@
 {
     public interface ISendLogInRequestGateway
     {
-        Task<HttpResponseMessage> ExecuteAsync(int userId);
+        Task<HttpResponseMessage> ExecuteAsync(long userId);
     }
 }

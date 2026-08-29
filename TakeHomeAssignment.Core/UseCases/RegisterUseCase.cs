@@ -31,6 +31,7 @@ namespace TakeHomeAssignment.UseCases
 
                 if (isSuccess)
                 {
+                    var raw = await response.Content.ReadAsStringAsync();
                     var registerResponse = await response.Content.ReadFromJsonAsync<RegisterResponse>();
                     if (registerResponse != null)
                     {

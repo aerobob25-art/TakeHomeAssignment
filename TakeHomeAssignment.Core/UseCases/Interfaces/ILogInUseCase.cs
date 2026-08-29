@@ -2,6 +2,6 @@
 {
     public interface ILogInUseCase
     {
-        void Execute(int userId);
+        Task Execute(long userId);
     }
 }
