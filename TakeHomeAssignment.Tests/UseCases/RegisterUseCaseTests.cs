@@ -2,6 +2,7 @@ using Moq;
 using System.Net;
 using System.Text;
 using TakeHomeAssignment.Core.Messages;
+using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
 using TakeHomeAssignment.Gateways.Interfaces;
 using TakeHomeAssignment.Presenters.Interfaces;
@@ -45,7 +46,9 @@ namespace TakeHomeAssignment.Tests.UseCases
 
             _registerPresenter.Verify(
                 presenter => presenter.Present(
-                    It.Is<RegisterResultMessage>(message => message.Id == 42)),
+                    It.Is<RegisterResultMessage>(message =>
+                        message.Id == 42 &&
+                        message.ClientState == ClientStates.Registered)),
                 Times.Once);
         }
 
@@ -61,7 +64,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute();
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("Registration failed"),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "Registration failed" &&
+                        message.ClientState == ClientStates.Unregistered)),
                 Times.Once);
         }
 
@@ -80,7 +86,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute();
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("User ID was not an int."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "User ID was not valid." &&
+                        message.ClientState == ClientStates.Unregistered)),
                 Times.Once);
         }
 
@@ -94,7 +103,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute();
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("The server request timed out."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "The server request timed out." &&
+                        message.ClientState == ClientStates.Unregistered)),
                 Times.Once);
         }
     }

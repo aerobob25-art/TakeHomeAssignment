@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using TakeHomeAssignment.Controllers.Interfaces;
 using TakeHomeAssignment.Core.Messages;
+using TakeHomeAssignment.Core.Models;
 
 namespace TakeHomeAssignment.ViewModels
 {
@@ -65,7 +66,7 @@ namespace TakeHomeAssignment.ViewModels
         public void Receive(RegisterResultMessage message)
         {
             UserId = message.Id;
-            ClientState = "Registered";
+            ClientState = GetClientStateText(message.ClientState);
             SetWorking(false);
         }
 
@@ -73,12 +74,13 @@ namespace TakeHomeAssignment.ViewModels
         {
             HasError = true;
             ErrorMessage = message.Error;
+            ClientState = GetClientStateText(message.ClientState);
             SetWorking(false);
         }
 
         public void Receive(LogInResultMessage message)
         {
-            ClientState = "Logged In";
+            ClientState = GetClientStateText(message.ClientState);
             SetWorking(false);
         }
 
@@ -113,6 +115,28 @@ namespace TakeHomeAssignment.ViewModels
         { 
             get => _errorMessage; 
             set => SetProperty(ref _errorMessage, value); 
+        }
+
+        private string GetClientStateText(ClientStates state)
+        {
+            var stateText = ClientState;
+
+            switch (state)
+            {
+                case ClientStates.NoChange:
+                    break;
+                case ClientStates.Registered:
+                    stateText = "Registered";
+                    break;
+                case ClientStates.LoggedIn:
+                    stateText = "Logged In";
+                    break;
+                default:
+                    stateText = "Unregistered";
+                    break;
+            }
+                
+            return stateText;
         }
     }
 }

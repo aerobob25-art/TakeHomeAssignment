@@ -1,7 +1,9 @@
-﻿namespace TakeHomeAssignment.Core.Presenters.Interfaces
+﻿using TakeHomeAssignment.Core.Messages;
+
+namespace TakeHomeAssignment.Core.Presenters.Interfaces
 {
     public interface IErrorPresenter
     {
-        public void Present(string error);
+        public void Present(ErrorMessage message);
     }
 }

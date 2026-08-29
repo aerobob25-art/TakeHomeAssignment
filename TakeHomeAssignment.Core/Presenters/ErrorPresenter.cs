@@ -12,9 +12,9 @@ namespace TakeHomeAssignment.Core.Presenters
         {
             _messenger = messenger;
         }
-        public void Present(string error)
+        public void Present(ErrorMessage message)
         {
-            _messenger.Send(new ErrorMessage(error));
+            _messenger.Send(message);
         }
     }
 }

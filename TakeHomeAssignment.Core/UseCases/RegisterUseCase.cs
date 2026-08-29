@@ -37,26 +37,44 @@ namespace TakeHomeAssignment.UseCases
                     {
                         _registerPresenter.Present(new RegisterResultMessage
                         {
-                            Id = registerResponse.UserId
+                            Id = registerResponse.UserId,
+                            ClientState = ClientStates.Registered
                         });
                     }
                 }
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
-                    _errorPresenter.Present(
-                        string.IsNullOrWhiteSpace(errorMessage) ?
-                        "Encountered Unknown Error" :
-                        errorMessage);
+                    _errorPresenter.Present(new ErrorMessage()
+                    {
+                        Error = string.IsNullOrWhiteSpace(errorMessage) ? "Encountered Unknown Error" : errorMessage,
+                        ClientState = ClientStates.Unregistered
+                    });
                 }
             }
             catch (JsonException) 
             {
-                _errorPresenter.Present("User ID was not an int.");
+                _errorPresenter.Present(new ErrorMessage()
+                {
+                    Error = "User ID was not valid.",
+                    ClientState = ClientStates.Unregistered
+                });
             }
             catch (TaskCanceledException) 
             {
-                _errorPresenter.Present("The server request timed out.");
+                _errorPresenter.Present(new ErrorMessage() 
+                {
+                    Error = "The server request timed out.",
+                    ClientState = ClientStates.Unregistered
+                });
+            }
+            catch (Exception)
+            {
+                _errorPresenter.Present(new ErrorMessage()
+                {
+                    Error = "Unknown error has occurred.",
+                    ClientState = ClientStates.Unregistered
+                });
             }
         }
     }

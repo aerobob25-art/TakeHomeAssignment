@@ -1,6 +1,7 @@
 using System.Net;
 using Moq;
 using TakeHomeAssignment.Core.Messages;
+using TakeHomeAssignment.Core.Models;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
 using TakeHomeAssignment.Gateways.Interfaces;
 using TakeHomeAssignment.Presenters.Interfaces;
@@ -50,7 +51,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute(1);
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("User not found."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "User ID not found" &&
+                        message.ClientState == ClientStates.Unregistered)),
                 Times.Once);
         }
 
@@ -63,7 +67,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute(1);
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("Invalid User ID."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "Invalid User ID." &&
+                        message.ClientState == ClientStates.NoChange)),
                 Times.Once);
         }
 
@@ -76,7 +83,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute(1);
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("Login Failed."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "Login Failed." &&
+                        message.ClientState == ClientStates.NoChange)),
                 Times.Once);
         }
 
@@ -89,7 +99,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute(1);
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("Unknown Error Occurred."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "Unknown Error Occurred." &&
+                        message.ClientState == ClientStates.NoChange)),
                 Times.Once);
         }
 
@@ -103,7 +116,10 @@ namespace TakeHomeAssignment.Tests.UseCases
             await _useCase.Execute(1);
 
             _errorPresenter.Verify(
-                presenter => presenter.Present("The server request timed out."),
+                presenter => presenter.Present(
+                    It.Is<ErrorMessage>(message =>
+                        message.Error == "The server request timed out." &&
+                        message.ClientState == ClientStates.NoChange)),
                 Times.Once);
         }
 
