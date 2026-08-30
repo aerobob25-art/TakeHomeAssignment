@@ -20,22 +20,12 @@ namespace TakeHomeAssignment.Core.UseCases
             _errorPresenter = errorPresenter;
         }
 
-        public async Task Execute(long? userId)
+        public async Task Execute(long userId)
         {
             try
             {
-                if(userId == null)
-                {
-                    _errorPresenter.Present(new ErrorMessage()
-                    {
-                        Error = "Please enter a valid User ID",
-                        ClientState = ClientStates.NoChange
-                    });
+                using var response = await _sendLogInRequestGateway.ExecuteAsync(userId);
 
-                    return;
-                }
-
-                using var response = await _sendLogInRequestGateway.ExecuteAsync((long)userId!);
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.OK:

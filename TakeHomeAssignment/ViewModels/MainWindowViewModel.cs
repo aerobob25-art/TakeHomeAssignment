@@ -37,8 +37,15 @@ namespace TakeHomeAssignment.ViewModels
         private void LogIn()
         {
             ClearErrorState();
+            if(string.IsNullOrWhiteSpace(UserId) || !long.TryParse(UserId, out var userId))
+            {
+                HasError = true;
+                ErrorMessage = "Please enter a valid User ID.";
+                return;
+            }
+
             SetWorking(true);
-            _logInController.Execute(UserId);
+            _logInController.Execute(userId);
         }
 
         private void SetWorking(bool isWorking)
@@ -65,7 +72,7 @@ namespace TakeHomeAssignment.ViewModels
 
         public void Receive(RegisterResultMessage message)
         {
-            UserId = message.Id;
+            UserId = message.Id.ToString();
             ClientState = GetClientStateText(message.ClientState);
             SetWorking(false);
         }
@@ -89,8 +96,8 @@ namespace TakeHomeAssignment.ViewModels
         public IRelayCommand RegisterCommand { get; }
 
 
-        private long? _userId;
-        public long? UserId 
+        private string _userId = string.Empty;
+        public string UserId 
         { 
             get => _userId; 
             set => SetProperty(ref _userId, value); 
