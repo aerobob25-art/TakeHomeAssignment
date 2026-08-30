@@ -12,6 +12,7 @@ namespace TakeHomeAssignment.Core.Presenters
         {
             _messenger = messenger;
         }
+
         public void Present(RegisterResultMessage message)
         {
             _messenger.Send(message);
