@@ -10,8 +10,8 @@ using TakeHomeAssignment.Core.Gateways;
 using TakeHomeAssignment.Core.Gateways.Interfaces;
 using TakeHomeAssignment.Core.Presenters;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
+using TakeHomeAssignment.Core.UseCases;
 using TakeHomeAssignment.Core.UseCases.Interfaces;
-using TakeHomeAssignment.UseCases;
 using TakeHomeAssignment.ViewModels;
 using WinRT.Interop;
 

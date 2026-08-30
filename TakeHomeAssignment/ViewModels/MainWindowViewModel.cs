@@ -89,8 +89,8 @@ namespace TakeHomeAssignment.ViewModels
         public IRelayCommand RegisterCommand { get; }
 
 
-        private long _userId;
-        public long UserId 
+        private long? _userId;
+        public long? UserId 
         { 
             get => _userId; 
             set => SetProperty(ref _userId, value); 

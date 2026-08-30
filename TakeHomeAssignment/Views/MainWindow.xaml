@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
+            Margin="0,100,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Margin="0, 50">
+            VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
@@ -81,7 +81,7 @@
             Grid.Row="1"
             MaxHeight="30"
             Margin="10"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Text="{Binding ClientState}" />
     </Grid>
 </Window>

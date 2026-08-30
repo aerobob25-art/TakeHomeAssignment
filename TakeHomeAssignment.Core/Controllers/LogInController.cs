@@ -12,7 +12,7 @@ namespace TakeHomeAssignment.Core.Controllers
             _logInUseCase = logInUseCase;
         }
 
-        public void Execute(long userId)
+        public void Execute(long? userId)
         {
             _logInUseCase.Execute(userId);
         }
