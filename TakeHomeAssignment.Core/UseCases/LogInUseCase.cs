@@ -31,6 +31,8 @@ namespace TakeHomeAssignment.Core.UseCases
                         Error = "Please enter a valid User ID",
                         ClientState = ClientStates.NoChange
                     });
+
+                    return;
                 }
 
                 using var response = await _sendLogInRequestGateway.ExecuteAsync((long)userId!);
