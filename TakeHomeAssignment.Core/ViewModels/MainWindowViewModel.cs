@@ -54,6 +54,7 @@ namespace TakeHomeAssignment.Core.ViewModels
             LogInCommand.NotifyCanExecuteChanged();
             RegisterCommand.NotifyCanExecuteChanged();
         }
+
         private bool CanLogIn()
         {
             return !_isWorking;
