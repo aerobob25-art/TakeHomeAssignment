@@ -12,7 +12,7 @@ using TakeHomeAssignment.Core.Presenters;
 using TakeHomeAssignment.Core.Presenters.Interfaces;
 using TakeHomeAssignment.Core.UseCases;
 using TakeHomeAssignment.Core.UseCases.Interfaces;
-using TakeHomeAssignment.ViewModels;
+using TakeHomeAssignment.Core.ViewModels;
 using WinRT.Interop;
 
 namespace TakeHomeAssignment

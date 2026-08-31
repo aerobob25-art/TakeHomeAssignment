@@ -5,7 +5,7 @@ using TakeHomeAssignment.Core.Controllers.Interfaces;
 using TakeHomeAssignment.Core.Messages;
 using TakeHomeAssignment.Core.Models;
 
-namespace TakeHomeAssignment.ViewModels
+namespace TakeHomeAssignment.Core.ViewModels
 {
     public class MainWindowViewModel : ObservableRecipient,
         IRecipient<RegisterResultMessage>,
