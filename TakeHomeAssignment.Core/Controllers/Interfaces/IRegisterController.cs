@@ -2,6 +2,6 @@
 {
     public interface IRegisterController
     {
-        void Execute();
+        void Execute(CancellationToken cancellationToken);
     }
 }

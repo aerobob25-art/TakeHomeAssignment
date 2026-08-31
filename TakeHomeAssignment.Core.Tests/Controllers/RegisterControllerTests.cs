@@ -20,8 +20,8 @@ namespace TakeHomeAssignment.Tests.Controllers
         [Test]
         public void Controller_Executes_CallsUseCase()
         {
-            _controller.Execute();
-            _useCase.Verify(m => m.Execute(), Times.Once);
+            _controller.Execute(default);
+            _useCase.Verify(m => m.Execute(default), Times.Once);
         }
     }
 }

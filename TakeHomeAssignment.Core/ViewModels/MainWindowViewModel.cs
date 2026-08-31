@@ -31,7 +31,7 @@ namespace TakeHomeAssignment.Core.ViewModels
         {
             ClearErrorState();
             SetWorking(true);
-            _registerController.Execute();
+            _registerController.Execute(default);
         }
 
         private void LogIn()
@@ -124,6 +124,8 @@ namespace TakeHomeAssignment.Core.ViewModels
             get => _errorMessage; 
             set => SetProperty(ref _errorMessage, value); 
         }
+
+
 
         private string GetClientStateText(ClientStates state)
         {

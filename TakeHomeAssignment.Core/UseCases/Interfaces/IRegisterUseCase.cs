@@ -2,6 +2,6 @@
 {
     public interface IRegisterUseCase
     {
-        Task Execute();
+        Task Execute(CancellationToken cancellationToken);
     }
 }
