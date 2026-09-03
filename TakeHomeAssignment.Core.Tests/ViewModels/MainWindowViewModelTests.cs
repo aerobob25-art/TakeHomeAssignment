@@ -113,7 +113,7 @@ namespace TakeHomeAssignment.Core.Tests.ViewModels
         {
             _viewModel.RegisterCommand.Execute(null);
 
-            _registerController.Verify(m => m.Execute(default), Times.Once);
+            _registerController.Verify(m => m.Execute(), Times.Once);
         }
 
         [Test]

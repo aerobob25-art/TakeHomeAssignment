@@ -21,32 +21,27 @@ namespace TakeHomeAssignment.Core.UseCases
             _errorPresenter = errorPresenter;
         }
 
-        public async Task Execute(CancellationToken cancellationToken)
+        public async Task Execute()
         {
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                using var response = await _sendRegisterRequestGateway.ExecuteAsync();
+                var isSuccess = response.IsSuccessStatusCode;
 
-                HttpResponseMessage response;
-                do
+                if (isSuccess)
                 {
-                    response = await _sendRegisterRequestGateway.ExecuteAsync(cancellationToken);
+                    var registerResponse = await response.Content.ReadFromJsonAsync<RegisterResponse>();
+                    if (registerResponse == null)
+                    {
+                        throw new HttpRequestException();
+                    }
+
+                    _registerPresenter.Present(new RegisterResultMessage
+                    {
+                        Id = registerResponse.UserId,
+                        ClientState = ClientStates.Registered
+                    });
                 }
-                while (!response.IsSuccessStatusCode);
-
-                var registerResponse = await response.Content.ReadFromJsonAsync<RegisterResponse>();
-                if (registerResponse == null)
-                {
-                    throw new HttpRequestException();
-                }
-                
-                _registerPresenter.Present(new RegisterResultMessage
-                {
-                    Id = registerResponse.UserId,
-                    ClientState = ClientStates.Registered
-                });
-
-                /*
                 else
                 {
                     var errorMessage = await response.Content.ReadAsStringAsync();
@@ -56,7 +51,6 @@ namespace TakeHomeAssignment.Core.UseCases
                         ClientState = ClientStates.Unregistered
                     });
                 }
-                */
             }
             catch (JsonException) 
             {
@@ -66,19 +60,11 @@ namespace TakeHomeAssignment.Core.UseCases
                     ClientState = ClientStates.Unregistered
                 });
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException) 
             {
-                _errorPresenter.Present(new ErrorMessage()
+                _errorPresenter.Present(new ErrorMessage() 
                 {
                     Error = "The server request timed out.",
-                    ClientState = ClientStates.Unregistered
-                });
-            }
-            catch (OperationCanceledException)
-            {
-                _errorPresenter.Present(new ErrorMessage()
-                {
-                    Error = "User Cancelled Action.",
                     ClientState = ClientStates.Unregistered
                 });
             }

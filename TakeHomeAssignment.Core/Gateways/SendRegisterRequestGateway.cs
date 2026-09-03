@@ -11,9 +11,9 @@ namespace TakeHomeAssignment.Core.Gateways
             _httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
+        public async Task<HttpResponseMessage> ExecuteAsync()
         {
-            return await _httpClient.PostAsync("/register", null, cancellationToken);
+            return await _httpClient.PostAsync("/register", null);
         }
     }
 }

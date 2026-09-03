@@ -2,6 +2,6 @@
 {
     public interface ISendRegisterRequestGateway
     {
-        Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken);
+        Task<HttpResponseMessage> ExecuteAsync();
     }
 }

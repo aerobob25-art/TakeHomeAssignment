@@ -12,9 +12,9 @@ namespace TakeHomeAssignment.Core.Controllers
             _registerUseCase = registerUseCase;
         }
 
-        public void Execute(CancellationToken cancellation)
+        public void Execute()
         {
-            _registerUseCase.Execute(cancellation);
+            _registerUseCase.Execute();
         }
     }
 }
